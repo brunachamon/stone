@@ -4,24 +4,25 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
   <Formik
     initialValues={product}
     validate={(values) => {
-      {
-        /* name: String,
-  description: String,
-  price: Number,
-  category: String,
-  image: String,
+      const errors = {};
 
-   */
+      if (!values.price || values.price <= 0) {
+        errors.price = "O preço do produto precisa ser maior que zero.";
       }
-      //   const errors = {};
-      //   if (!values.email) {
-      //     errors.email = "Required";
-      //   } else if (
-      //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-      //   ) {
-      //     errors.email = "Invalid email address";
-      //   }
-      //   return errors;
+      if (!values.name) {
+        errors.name = "O nome do produto não pode ser vázio.";
+      }
+      if (!values.category) {
+        errors.category = "A categoria do produto não pode ser vázia.";
+      }
+      if (!values.description) {
+        errors.description = "A descrição do produto não pode ser vázia.";
+      }
+      if (!values.image) {
+        errors.image = "A URL da imagem do produto não pode ser vázia.";
+      }
+
+      return errors;
     }}
     onSubmit={(values, { setSubmitting }) => {
       //   setTimeout(() => {
@@ -51,6 +52,13 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
                     : "Cadastro de produto"}
                 </h1>
                 <div>
+                  <label
+                    htmlFor="name"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Nome
+                  </label>
+
                   <input
                     type="name"
                     name="name"
@@ -59,26 +67,96 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
                     value={values.name}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
-                  {errors.name && touched.name && errors.name}
+                  {errors.name && touched.name && (
+                    <span className="text-red-400">{errors.name}</span>
+                  )}
                 </div>
 
-                {/* <div>
+                <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="description"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    E-mail
+                    Descrição
                   </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="name@gmail.com"
-                    required=""
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
+
+                  <textarea
+                    type="text"
+                    name="description"
+                    rows="5"
+                    cols="40"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.description}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
-                </div> */}
+                  {errors.description && touched.description && (
+                    <span className="text-red-400">{errors.description}</span>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="price"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Preço
+                  </label>
+
+                  <input
+                    type="number"
+                    name="price"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.price}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                  {errors.price && touched.price && (
+                    <span className="text-red-400">{errors.price}</span>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="category"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Categoria
+                  </label>
+
+                  <input
+                    type="text"
+                    name="category"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.category}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                  {errors.category && touched.category && (
+                    <span className="text-red-400">{errors.category}</span>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="image"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Url da imagem
+                  </label>
+
+                  <input
+                    type="text"
+                    name="image"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.image}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                  {errors.image && touched.image && (
+                    <span className="text-red-400">{errors.image}</span>
+                  )}
+                </div>
 
                 <button
                   type="submit"
@@ -97,54 +175,3 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
 );
 
 export default ProductForm;
-
-{
-  /* <input
-          type="name"
-          name="name"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.name}
-        />
-        {errors.name && touched.name && errors.name}
-
-        <input
-          type="text"
-          name="description"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.description}
-        />
-        {errors.description && touched.description && errors.description}
-
-        <input
-          type="number"
-          name="price"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.price}
-        />
-        {errors.price && touched.price && errors.price}
-
-        <input
-          type="text"
-          name="category"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.category}
-        />
-        {errors.category && touched.category && errors.category}
-
-        <input
-          type="url"
-          name="image"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.image}
-        />
-        {errors.image && touched.image && errors.image}
-
-        <button type="submit" disabled={isSubmitting}>
-          Submit
-        </button> */
-}
