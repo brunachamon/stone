@@ -10,7 +10,7 @@ const { HTTP_STATUS_CODES } = require("./utils/httpStatusCodes");
 const { listProducts } = require("./controllers/product");
 
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
 
 app.use(bodyParser.json());
 
@@ -107,7 +107,6 @@ app.post("/products", async (req, res) => {
   }
 });
 
-// Iniciar o servidor
 app.listen(PORT, () => {
-  console.log(`Servidor iniciado na porta ${PORT}`);
+  console.log(`Server alive in ${PORT}`);
 });
