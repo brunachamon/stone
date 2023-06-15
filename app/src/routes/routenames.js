@@ -1,4 +1,4 @@
-export const RouteNames = {
+export default {
   ROOT: "/",
   PRODUCTS: "/products",
   REGISTER: "/register",
