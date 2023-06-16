@@ -1,9 +1,10 @@
+const mongoose = require("mongoose");
 const Product = require("../models/Product");
 
 const { HTTP_STATUS_CODES } = require("../utils/httpStatusCodes");
 const ValidationMessages = require("../utils/validationMessages");
 
-const listProducts = async (res) => {
+const listProducts = async (_, res) => {
   try {
     const products = await Product.find();
 
@@ -66,9 +67,10 @@ const editProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, description, price, category, image } = req.body;
+    const objectId = new mongoose.Types.ObjectId(id);
 
     const updatedProduct = await Product.findByIdAndUpdate(
-      id,
+      objectId,
       { name, description, price, category, image },
       { new: true }
     );

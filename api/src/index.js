@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const productRoutes = require("./routes/product");
 const userRoutes = require("./routes/user");
@@ -13,18 +14,16 @@ const PORT = 4000;
 
 require("dotenv").config();
 
-console.log(">>>", process.env.mongoURI);
-
 app.use(bodyParser.json());
+app.use(cors());
 
 // Conexao com o MongoDB
 mongoose
   .connect(process.env.mongoURI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
   })
-  .then(() => console.log("Conectado ao banco de dados"))
-  .catch((err) => console.log("Erro ao conectar ao banco de dados:", err));
+  .then(() => console.log("Connection to Mongo DB is open!"))
+  .catch((err) => console.log("Error trying to connect on MongoBD Atlas", err));
 
 // Rotas de produtos
 app.use(RouteNames.PRODUCTS, productRoutes);
