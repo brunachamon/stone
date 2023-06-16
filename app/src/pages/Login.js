@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import RouteNames from "../routes/routenames";
+import RouteNames from "../routes/RouteNames";
 import { handleLogin } from "../services/user";
 
 const Login = () => {

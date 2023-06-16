@@ -6,36 +6,24 @@ import { selectProducts } from "../slices/product";
 import ProductForm from "./ProductForm";
 
 const ProductDetails = () => {
-  const params = useParams();
-
-  const { id: productId } = params;
+  const { id: productId } = useParams();
 
   const products = useSelector(selectProducts);
-
-  console.log("products", typeof productId, typeof products[0]._id);
 
   const product = useMemo(
     () => products.find((prd) => prd._id === +productId),
     [productId]
   );
 
-  console.log("product >>>>>>>>>>>>", product);
+  const onSubmit = () => {
+    //TODO: call backend
+  };
 
   if (!product) {
-    return <div>Carregando...</div>;
+    return <div>Produto não encontrado.</div>;
   }
 
-  return (
-    <div>
-      {/* <h1>{product.name}</h1>
-      <p>Descrição: {product.description}</p>
-      <p>Preço: {product.price}</p>
-      <p>Categoria: {product.category}</p>
-      <img src={product.image} alt={product.name} /> */}
-
-      <ProductForm isEditting product={product} />
-    </div>
-  );
+  return <ProductForm isEditting product={product} onSubmit={onSubmit} />;
 };
 
 export default ProductDetails;

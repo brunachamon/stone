@@ -1,21 +1,27 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import ProductCard from "../components/product-card";
+import ProductCard from "../components/ProductCard";
 import { fetchProducts } from "../services/product";
 import {
   selectHasProductsError,
   selectIsProductsLoading,
   selectProducts,
 } from "../slices/product";
+import RouteNames from "../routes/RouteNames";
 
 const ProductList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const products = useSelector(selectProducts);
   const isLoading = useSelector(selectIsProductsLoading);
   const hasError = useSelector(selectHasProductsError);
+
+  const handleNewProduct = () => {
+    navigate(RouteNames.NEW_PRODUCT);
+  };
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -31,14 +37,19 @@ const ProductList = () => {
 
   return (
     <div>
-      <h1>Lista de produtos</h1>
-
+      <div class="flex justify-end">
+        <button
+          type="submit"
+          className=" text-white bg-sky-500/75 hover:bg-sky-500/50 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+          onClick={handleNewProduct}
+        >
+          Novo produto
+        </button>
+      </div>
       <ul>
         {products.map((product) => (
           <li key={product._id}>
-            <Link to={`/products/${product._id}`}>
-              <ProductCard {...product} />
-            </Link>
+            <ProductCard {...product} />
           </li>
         ))}
       </ul>

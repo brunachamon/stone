@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import RouteNames from "../routes/routenames";
+import RouteNames from "../routes/RouteNames";
 import { useSelector } from "react-redux";
 import { selectIsLogged } from "../slices/user";
 
