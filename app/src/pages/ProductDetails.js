@@ -1,25 +1,35 @@
-import { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router";
 
-import { selectProducts } from "../slices/product";
 import ProductForm from "./ProductForm";
-import { handleEditProduct } from "../services/product";
+import RouteNames from "../routes/RouteNames";
+import {
+  handleEditProduct,
+  handleSearchProductById,
+} from "../services/product";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [product, setProduct] = useState();
   const { id: productId } = useParams();
 
-  const products = useSelector(selectProducts);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { payload } = await dispatch(handleSearchProductById(productId));
 
-  const product = useMemo(
-    () => products.find((prd) => prd._id === +productId),
-    [productId]
-  );
+      setProduct(payload);
+    };
 
-  const onSubmit = (values) => {
-    //TODO: call backend
-    dispatch(handleEditProduct(values));
+    fetchProduct();
+  }, []);
+
+  const onSubmit = async (values) => {
+    await dispatch(handleEditProduct(values));
+
+    navigate(RouteNames.PRODUCTS);
   };
 
   if (!product) {

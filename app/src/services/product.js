@@ -15,7 +15,20 @@ export const handleNewProduct = createAsyncThunk(
 
 export const handleEditProduct = createAsyncThunk(
   "products/edit",
-  async (data) => await api.put(`/products/${data._id}`, data)
+  async (data) => {
+    const { data: results = [] } = await api.put(`/products/${data._id}`, data);
+
+    return results;
+  }
+);
+
+export const handleSearchProductById = createAsyncThunk(
+  "products/edit",
+  async (id) => {
+    const { data: results = [] } = await api.get(`/products/${id}`);
+
+    return results;
+  }
 );
 
 // export const handleRemoveProduct = createAsyncThunk(
