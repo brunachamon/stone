@@ -25,17 +25,20 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
       return errors;
     }}
     onSubmit={(values, { setSubmitting }) => {
-      //   setTimeout(() => {
-      //     alert(JSON.stringify(values, null, 2));
-      //     setSubmitting(false);
-      //   }, 400);
-      onSubmit?.(values);
+      console.log(">>>>>>>> values", values);
+
+      try {
+        setSubmitting(true);
+
+        onSubmit?.(values);
+      } finally {
+        setSubmitting(false);
+      }
     }}
   >
     {({
       values,
       errors,
-      touched,
       handleChange,
       handleBlur,
       handleSubmit,
@@ -67,7 +70,7 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
                     value={values.name}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
-                  {errors.name && touched.name && (
+                  {errors.name && (
                     <span className="text-red-400">{errors.name}</span>
                   )}
                 </div>
@@ -90,7 +93,7 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
                     value={values.description}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
-                  {errors.description && touched.description && (
+                  {errors.description && (
                     <span className="text-red-400">{errors.description}</span>
                   )}
                 </div>
@@ -111,7 +114,7 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
                     value={values.price}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
-                  {errors.price && touched.price && (
+                  {errors.price && (
                     <span className="text-red-400">{errors.price}</span>
                   )}
                 </div>
@@ -132,7 +135,7 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
                     value={values.category}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
-                  {errors.category && touched.category && (
+                  {errors.category && (
                     <span className="text-red-400">{errors.category}</span>
                   )}
                 </div>
@@ -153,7 +156,7 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
                     value={values.image}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
-                  {errors.image && touched.image && (
+                  {errors.image && (
                     <span className="text-red-400">{errors.image}</span>
                   )}
                 </div>

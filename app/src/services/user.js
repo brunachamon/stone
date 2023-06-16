@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "./axios";
 
 export const handleLogin = createAsyncThunk("user/login", async (userData) => {
-  const { token } = await api.get("/login", userData);
+  const { token } = await api.get("user/login", userData);
 
   return token;
 });
