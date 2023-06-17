@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import RouteNames from "../routes/RouteNames";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectIsLogged } from "../slices/user";
+import { logout } from "../utils/session";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isLogged = useSelector(selectIsLogged);
 
   return (
@@ -34,12 +37,16 @@ const Navbar = () => {
           >
             Novo usuário
           </Link>
-          <Link
-            to={RouteNames.LOGIN}
-            className="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark"
-          >
-            Login
-          </Link>
+          {isLogged ? (
+            <button onClick={() => logout(dispatch, navigate)}>Logout</button>
+          ) : (
+            <Link
+              to={RouteNames.LOGIN}
+              className="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </nav>

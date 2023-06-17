@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { handleLogin } from "../services/user";
 
 const initialState = {
-  user: null,
+  token: "",
   isLogged: false,
   hasError: "",
 };
@@ -11,13 +11,9 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    login: (state, action) => {
-      state.user = action.payload;
-      state.isLogged = true;
-    },
-    logout: (state) => {
-      state.user = null;
-      state.isLogged = false;
+    clearStore() {
+      // Essa funcao deve ficar vazia para limpar o estado
+      // A verdadeira remoção do persist acontece com a configuração dentro do rootReducer, que é chamada por essa funcao
     },
   },
   extraReducers: (builder) => {
@@ -26,20 +22,20 @@ const userSlice = createSlice({
         state.hasError = null;
       })
       .addCase(handleLogin.fulfilled, (state, action) => {
-        console.log("action payload", action.payload);
         state.isLogged = true;
-        state.user = action.payload;
+        state.token = action.payload;
       })
       .addCase(handleLogin.rejected, (state, action) => {
         state.isLogged = false;
-        state.user = null;
+        state.token = null;
         state.hasError = action.error.message;
       });
   },
 });
 
-export const { login, logout } = userSlice.actions;
-
 export const selectIsLogged = (state) => state.user.isLogged;
+export const selectToken = (state) => state.user.token;
+
+export const { clearStore } = userSlice.actions;
 
 export default userSlice.reducer;
