@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchProducts } from "../services/product";
+import { handleFetchProducts } from "../services/product";
 
 const productSlice = createSlice({
   name: "products",
@@ -11,15 +11,15 @@ const productSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProducts.pending, (state) => {
+      .addCase(handleFetchProducts.pending, (state) => {
         state.isLoading = true;
         state.hasError = null;
       })
-      .addCase(fetchProducts.fulfilled, (state, action) => {
+      .addCase(handleFetchProducts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.list = action.payload;
       })
-      .addCase(fetchProducts.rejected, (state, action) => {
+      .addCase(handleFetchProducts.rejected, (state, action) => {
         state.isLoading = false;
         state.hasError = action.error.message;
       });

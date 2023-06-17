@@ -2,11 +2,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import api from "./axios";
 
-export const fetchProducts = createAsyncThunk("products/fetch", async () => {
-  const { data = [] } = await api.get("/products");
+export const handleFetchProducts = createAsyncThunk(
+  "products/fetch",
+  async () => {
+    const { data = [] } = await api.get("/products");
 
-  return data;
-});
+    return data;
+  }
+);
 
 export const handleNewProduct = createAsyncThunk(
   "products/register",

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import ProductCard from "../components/ProductCard";
-import { fetchProducts } from "../services/product";
+import { handleFetchProducts } from "../services/product";
 import {
   selectHasProductsError,
   selectIsProductsLoading,
@@ -24,7 +24,7 @@ const ProductList = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(handleFetchProducts());
   }, [dispatch]);
 
   if (isLoading) {

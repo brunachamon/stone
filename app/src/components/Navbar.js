@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import RouteNames from "../routes/RouteNames";
-import { useDispatch, useSelector } from "react-redux";
 import { selectIsLogged } from "../slices/user";
 import { logout } from "../utils/session";
 
@@ -11,7 +11,7 @@ const Navbar = () => {
   const isLogged = useSelector(selectIsLogged);
 
   return (
-    <nav className="relative select-none bg-sky-500/75 lg:flex lg:items-stretch w-full">
+    <nav className="relative select-none bg-sky-500/75 lg:flex lg:items-stretch w-full px-3">
       <div className="lg:flex lg:items-stretch lg:flex-no-shrink lg:flex-grow">
         <div className="lg:flex lg:items-stretch lg:justify-end ml-auto">
           {isLogged && (
@@ -38,7 +38,12 @@ const Navbar = () => {
             Novo usuário
           </Link>
           {isLogged ? (
-            <button onClick={() => logout(dispatch, navigate)}>Logout</button>
+            <button
+              className="text-white"
+              onClick={() => logout(dispatch, navigate)}
+            >
+              Logout
+            </button>
           ) : (
             <Link
               to={RouteNames.LOGIN}
