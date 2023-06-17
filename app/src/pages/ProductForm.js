@@ -1,5 +1,7 @@
 import { Formik } from "formik";
 
+import ValidationMessages from "../utils/validationMessages";
+
 const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
   <Formik
     initialValues={product}
@@ -7,19 +9,19 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
       const errors = {};
 
       if (!values.price || values.price <= 0) {
-        errors.price = "O preço do produto precisa ser maior que zero.";
+        errors.price = ValidationMessages.price;
       }
       if (!values.name) {
-        errors.name = "O nome do produto não pode ser vázio.";
+        errors.name = ValidationMessages.name;
       }
       if (!values.category) {
-        errors.category = "A categoria do produto não pode ser vázia.";
+        errors.category = ValidationMessages.category;
       }
       if (!values.description) {
-        errors.description = "A descrição do produto não pode ser vázia.";
+        errors.description = ValidationMessages.description;
       }
       if (!values.image) {
-        errors.image = "A URL da imagem do produto não pode ser vázia.";
+        errors.image = ValidationMessages.image;
       }
 
       return errors;
@@ -58,16 +60,17 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Nome
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.name}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
                   </label>
 
-                  <input
-                    type="name"
-                    name="name"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.name}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
                   {errors.name && (
                     <span className="text-red-400">{errors.name}</span>
                   )}
@@ -79,18 +82,19 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Descrição
+                    <textarea
+                      type="text"
+                      id="description"
+                      name="description"
+                      rows="5"
+                      cols="40"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.description}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
                   </label>
 
-                  <textarea
-                    type="text"
-                    name="description"
-                    rows="5"
-                    cols="40"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.description}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
                   {errors.description && (
                     <span className="text-red-400">{errors.description}</span>
                   )}
@@ -102,16 +106,17 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Preço
+                    <input
+                      id="price"
+                      type="number"
+                      name="price"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.price}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
                   </label>
 
-                  <input
-                    type="number"
-                    name="price"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.price}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
                   {errors.price && (
                     <span className="text-red-400">{errors.price}</span>
                   )}
@@ -123,16 +128,17 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Categoria
+                    <input
+                      type="text"
+                      id="category"
+                      name="category"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.category}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
                   </label>
 
-                  <input
-                    type="text"
-                    name="category"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.category}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
                   {errors.category && (
                     <span className="text-red-400">{errors.category}</span>
                   )}
@@ -144,16 +150,17 @@ const ProductForm = ({ isEditting = false, product = {}, onSubmit }) => (
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Url da imagem
+                    <input
+                      type="text"
+                      id="image"
+                      name="image"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.image}
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
                   </label>
 
-                  <input
-                    type="text"
-                    name="image"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.image}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
                   {errors.image && (
                     <span className="text-red-400">{errors.image}</span>
                   )}
