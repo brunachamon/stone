@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { handleLogin } from "../services/user";
 
 const initialState = {
   user: null,
   isLogged: false,
+  hasError: "",
 };
 
 const userSlice = createSlice({
@@ -17,6 +19,22 @@ const userSlice = createSlice({
       state.user = null;
       state.isLogged = false;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(handleLogin.pending, (state) => {
+        state.hasError = null;
+      })
+      .addCase(handleLogin.fulfilled, (state, action) => {
+        console.log("action payload", action.payload);
+        state.isLogged = true;
+        state.user = action.payload;
+      })
+      .addCase(handleLogin.rejected, (state, action) => {
+        state.isLogged = false;
+        state.user = null;
+        state.hasError = action.error.message;
+      });
   },
 });
 

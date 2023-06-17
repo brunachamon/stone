@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import RouteNames from "../routes/RouteNames";
 import { handleLogin } from "../services/user";
 
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const credentials = {
@@ -18,7 +20,15 @@ const Login = () => {
       password,
     };
 
-    dispatch(handleLogin(credentials));
+    try {
+      const { error = null } = await dispatch(handleLogin(credentials));
+
+      if (!error) {
+        navigate(RouteNames.ROOT);
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   };
 
   return (

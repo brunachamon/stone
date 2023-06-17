@@ -1,9 +1,11 @@
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
+const User = require("../models/User");
 const { HTTP_STATUS_CODES } = require("../utils/httpStatusCodes");
 
-const userCreate = async ({ name, email, password }, res) => {
+const userCreate = async (req, res) => {
   try {
     const errors = validationResult(req);
 
@@ -12,6 +14,8 @@ const userCreate = async ({ name, email, password }, res) => {
         .status(HTTP_STATUS_CODES.BAD_RESQUEST)
         .json({ errors: errors.array() });
     }
+
+    const { body: { name, email, password } = {} } = req;
 
     const user = await User.findOne({ email });
 

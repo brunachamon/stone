@@ -1,9 +1,14 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
+const User = require("../models/User");
 const { HTTP_STATUS_CODES } = require("../utils/httpStatusCodes");
+const validationMessages = require("../utils/validationMessages");
 
-const userLogin = async ({ email, password }, res) => {
+const userLogin = async (req, res) => {
   try {
+    const { email, password } = req.body;
+
     let user = await User.findOne({ email });
 
     if (!user) {
@@ -26,7 +31,7 @@ const userLogin = async ({ email, password }, res) => {
           id: user.id,
         },
       },
-      config.jwtSecret,
+      process.env.jwtSecret,
       { expiresIn: "6h" }
     );
 
@@ -35,7 +40,7 @@ const userLogin = async ({ email, password }, res) => {
     console.error(err.message);
     res
       .status(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR)
-      .send(ValidationMessages.INTERNAL_ERROR);
+      .send(validationMessages.INTERNAL_ERROR);
   }
 };
 

@@ -23,7 +23,7 @@ export const handleEditProduct = createAsyncThunk(
 );
 
 export const handleSearchProductById = createAsyncThunk(
-  "products/edit",
+  "products/search",
   async (id) => {
     const { data: results = [] } = await api.get(`/products/${id}`);
 
@@ -31,7 +31,7 @@ export const handleSearchProductById = createAsyncThunk(
   }
 );
 
-// export const handleRemoveProduct = createAsyncThunk(
-//   "products/remove",
-//   async (id) => await api.delete(`/products/${id}`)
-// );
+export const handleRemoveProduct = createAsyncThunk(
+  "products/remove",
+  async (id) => await api.delete(`/products/${id}`)
+);
