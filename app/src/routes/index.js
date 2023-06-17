@@ -1,10 +1,11 @@
 import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import RouteNames from "./RouteNames";
 import { selectToken } from "../slices/user";
-import { setAuthToken } from "../services/axios";
+import { setAuthToken, setupAxiosErrorInterceptor } from "../services/axios";
+import { logout } from "../utils/session";
 
 const ProductList = lazy(() => import("../pages/ProductList"));
 const ProductDetails = lazy(() => import("../pages/ProductDetails"));
@@ -14,8 +15,13 @@ const Home = lazy(() => import("../pages/Home"));
 const ProductRegister = lazy(() => import("../pages/ProductRegister"));
 
 const Router = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector(selectToken);
+
+  useEffect(() => {
+    setupAxiosErrorInterceptor(navigate, logout(dispatch, navigate));
+  }, []);
 
   useEffect(() => {
     if (!token) {
