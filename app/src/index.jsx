@@ -10,7 +10,7 @@ import store from "./store";
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-let persistor = persistStore(store);
+const persistor = persistStore(store);
 
 root.render(
   <div className="h-full bg-gray-50 dark:bg-gray-500">
@@ -21,5 +21,5 @@ root.render(
         </PersistGate>
       </Provider>
     </React.StrictMode>
-  </div>
+  </div>,
 );

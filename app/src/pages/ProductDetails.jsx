@@ -4,12 +4,9 @@ import { useNavigate, useParams } from "react-router";
 
 import ProductForm from "./ProductForm";
 import RouteNames from "../routes/RouteNames";
-import {
-  handleEditProduct,
-  handleSearchProductById,
-} from "../services/product";
+import { handleEditProduct, handleSearchProductById } from "../slices/product";
 
-const ProductDetails = () => {
+function ProductDetails() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -37,6 +34,6 @@ const ProductDetails = () => {
   }
 
   return <ProductForm isEditting product={product} onSubmit={onSubmit} />;
-};
+}
 
 export default ProductDetails;

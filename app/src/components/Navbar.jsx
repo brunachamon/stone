@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import logout from "../utils/session";
 import RouteNames from "../routes/RouteNames";
 import { selectIsLogged } from "../slices/user";
-import { logout } from "../utils/session";
 
-const Navbar = () => {
+function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogged = useSelector(selectIsLogged);
@@ -39,6 +39,7 @@ const Navbar = () => {
           </Link>
           {isLogged ? (
             <button
+              type="button"
               className="text-white"
               onClick={() => logout(dispatch, navigate)}
             >
@@ -56,6 +57,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
+}
 
 export default Navbar;

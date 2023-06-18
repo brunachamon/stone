@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import ProductCard from "../components/ProductCard";
-import { handleFetchProducts } from "../services/product";
 import {
+  handleFetchProducts,
   selectHasProductsError,
   selectIsProductsLoading,
   selectProducts,
 } from "../slices/product";
 import RouteNames from "../routes/RouteNames";
 
-const ProductList = () => {
+function ProductList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,7 +32,12 @@ const ProductList = () => {
   }
 
   if (hasError) {
-    return <div>Erro: {hasError}</div>;
+    return (
+      <div>
+        Erro:
+        {hasError}
+      </div>
+    );
   }
 
   return (
@@ -55,6 +60,6 @@ const ProductList = () => {
       </ul>
     </div>
   );
-};
+}
 
 export default ProductList;

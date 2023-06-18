@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { handleLogin } from "../services/user";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+import api, { setAuthToken } from "../services/axios";
 
 const initialState = {
   token: "",
@@ -7,13 +8,27 @@ const initialState = {
   hasError: "",
 };
 
+export const handleLogin = createAsyncThunk("user/login", async (userData) => {
+  const { data: { token } = {} } = await api.post("/login", userData);
+
+  setAuthToken(token);
+
+  return token;
+});
+
+export const handleNewUser = createAsyncThunk(
+  "user/register",
+  async (userData) => await api.post("/user", userData),
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     clearStore() {
       // Essa funcao deve ficar vazia para limpar o estado
-      // A verdadeira remoção do persist acontece com a configuração dentro do rootReducer, que é chamada por essa funcao
+      // A verdadeira remoção do persist acontece com a configuração
+      // dentro do rootReducer, que é chamada por essa funcao
     },
   },
   extraReducers: (builder) => {

@@ -2,19 +2,19 @@ import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import logout from "../utils/session";
 import RouteNames from "./RouteNames";
 import { selectToken } from "../slices/user";
 import { setAuthToken, setupAxiosErrorInterceptor } from "../services/axios";
-import { logout } from "../utils/session";
 
 const ProductList = lazy(() => import("../pages/ProductList"));
 const ProductDetails = lazy(() => import("../pages/ProductDetails"));
-const UserRegister = lazy(() => import("../pages/UserRegister"));
+const UserRegisterForm = lazy(() => import("../pages/UserRegisterForm"));
 const Login = lazy(() => import("../pages/Login"));
 const Home = lazy(() => import("../pages/Home"));
 const ProductRegister = lazy(() => import("../pages/ProductRegister"));
 
-const Router = () => {
+function Router() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector(selectToken);
@@ -43,7 +43,7 @@ const Router = () => {
           element={<ProductDetails />}
         />
 
-        <Route path={RouteNames.REGISTER} element={<UserRegister />} />
+        <Route path={RouteNames.REGISTER} element={<UserRegisterForm />} />
 
         <Route path={RouteNames.LOGIN} element={<Login />} />
 
@@ -51,6 +51,6 @@ const Router = () => {
       </Routes>
     </Suspense>
   );
-};
+}
 
 export default Router;

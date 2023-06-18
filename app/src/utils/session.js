@@ -9,4 +9,4 @@ const logout = (dispatch, navigate) => {
   navigate(RouteNames.LOGIN);
 };
 
-export { logout };
+export default logout;

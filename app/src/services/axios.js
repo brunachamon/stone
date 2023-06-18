@@ -9,24 +9,24 @@ const setupAxiosErrorInterceptor = (navigate, onError) => {
     (response) => response,
     (error) => {
       if (
-        error.response &&
-        error.response.status === HttpStatusCode.Unauthorized
+        error.response
+        && error.response.status === HttpStatusCode.Unauthorized
       ) {
         onError?.();
         navigate("/login");
       }
 
       return Promise.reject(error);
-    }
+    },
   );
 };
 
 function setAuthToken(token) {
-  instance.defaults.headers.common["Authorization"] = "";
-  delete instance.defaults.headers.common["Authorization"];
+  instance.defaults.headers.common.Authorization = "";
+  delete instance.defaults.headers.common.Authorization;
 
   if (token) {
-    instance.defaults.headers.common["Authorization"] = `${token}`;
+    instance.defaults.headers.common.Authorization = `${token}`;
   }
 }
 

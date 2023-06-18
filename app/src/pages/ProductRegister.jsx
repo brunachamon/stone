@@ -2,10 +2,10 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import ProductForm from "./ProductForm";
-import { handleNewProduct } from "../services/product";
+import { handleNewProduct } from "../slices/product";
 import RouteNames from "../routes/RouteNames";
 
-const ProductRegister = () => {
+function ProductRegister() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -16,6 +16,6 @@ const ProductRegister = () => {
   };
 
   return <ProductForm onSubmit={onSubmit} />;
-};
+}
 
 export default ProductRegister;
