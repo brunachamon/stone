@@ -53,10 +53,10 @@ test("should submit the form values and navigate when is successfull", async () 
 test("should simulate an error in login", async () => {
   const error = new Error("Login falhoooou");
 
-  const mockHandleLoginFn = jest.fn(() => Promise.reject(error));
+  const mockHandleLoginWithErrorFn = jest.fn(() => Promise.reject(error));
 
   jest.mock("../slices/user", () => ({
-    handleLogin: mockHandleLoginFn,
+    handleLogin: mockHandleLoginWithErrorFn,
   }));
 
   const { getByText, getByLabelText } = render(<Login />);
