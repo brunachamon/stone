@@ -11,7 +11,7 @@ const userCreate = async (req, res) => {
 
     if (!errors.isEmpty()) {
       return res
-        .status(HTTP_STATUS_CODES.BAD_RESQUEST)
+        .status(HTTP_STATUS_CODES.BAD_REQUEST)
         .json({ errors: errors.array() });
     }
 
@@ -21,7 +21,7 @@ const userCreate = async (req, res) => {
 
     if (user) {
       return res
-        .status(HTTP_STATUS_CODES.BAD_RESQUEST)
+        .status(HTTP_STATUS_CODES.BAD_REQUEST)
         .json({ message: "Já existe um usuário usando o email fornecido." });
     }
 

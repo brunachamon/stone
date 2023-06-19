@@ -13,7 +13,7 @@ const userLogin = async (req, res) => {
 
     if (!user) {
       return res
-        .status(HTTP_STATUS_CODES.BAD_RESQUEST)
+        .status(HTTP_STATUS_CODES.BAD_REQUEST)
         .json({ message: "Verifique os dados do usuário." });
     }
 
@@ -21,7 +21,7 @@ const userLogin = async (req, res) => {
 
     if (!isPasswordMatched) {
       return res
-        .status(HTTP_STATUS_CODES.BAD_RESQUEST)
+        .status(HTTP_STATUS_CODES.BAD_REQUEST)
         .json({ message: "E-mail ou senha inválidos." });
     }
 

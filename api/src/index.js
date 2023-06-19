@@ -24,8 +24,6 @@ mongoose
   .connect(process.env.mongoURI, {
     useNewUrlParser: true,
   })
-  .then(() => console.log("Connection to Mongo DB is open!"))
-  .catch((err) => console.log("Error trying to connect on MongoBD Atlas", err));
 
 // Middleware para validar token do usuário
 const authenticateUser = (req, res, next) => {
@@ -61,3 +59,5 @@ app.use(RouteNames.LOGIN, loginRoutes);
 app.listen(PORT, () => {
   console.log(`Server alive in ${PORT}`);
 });
+
+module.exports = app;
