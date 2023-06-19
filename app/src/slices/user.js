@@ -18,7 +18,7 @@ export const handleLogin = createAsyncThunk("user/login", async (userData) => {
 
 export const handleNewUser = createAsyncThunk(
   "user/register",
-  async (userData) => await api.post("/user", userData),
+  async (userData) => await api.post("/user", userData)
 );
 
 const userSlice = createSlice({
