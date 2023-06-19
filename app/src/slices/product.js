@@ -39,10 +39,20 @@ export const handleRemoveProduct = createAsyncThunk(
   async (id) => await api.delete(`/products/${id}`)
 );
 
+export const handleFetchSuggestedProducts = createAsyncThunk(
+  "products/suggestions",
+  async () => {
+    const { data = [] } = await api.get("/suggestions");
+
+    return data;
+  }
+);
+
 const productSlice = createSlice({
   name: "products",
   initialState: {
     list: [],
+    suggestions: [],
     isLoading: false,
     hasError: null,
   },
@@ -59,11 +69,21 @@ const productSlice = createSlice({
       .addCase(handleFetchProducts.rejected, (state, action) => {
         state.isLoading = false;
         state.hasError = action.error.message;
+      })
+
+      .addCase(handleFetchSuggestedProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.suggestions = action.payload;
+      })
+      .addCase(handleFetchSuggestedProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.hasError = action.error.message;
       });
   },
 });
 
 export const selectProducts = (state) => state.products.list;
+export const selectSuggestionsProducts = (state) => state.products.suggestions;
 export const selectIsProductsLoading = (state) => state.products.loading;
 export const selectHasProductsError = (state) => state.products.error;
 

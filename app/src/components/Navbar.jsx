@@ -26,7 +26,7 @@ function Navbar() {
                 to={RouteNames.PRODUCTS}
                 className="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark"
               >
-                Produtos
+                Todos produtos
               </Link>
             </>
           )}
