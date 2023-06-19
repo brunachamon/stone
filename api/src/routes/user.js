@@ -4,9 +4,6 @@ const router = express.Router();
 const { body } = require("express-validator");
 const { userCreate } = require("../controllers/user");
 
-// Rota para criacao de usuário
-// app.post("/user", async (req, res) => userCreate(req, res));
-// Rota de login de usuário
 router.post(
   "/",
   [
