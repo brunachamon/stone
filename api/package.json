@@ -2,12 +2,12 @@
   "name": "stone",
   "version": "1.0.0",
   "description": "Test for a senior developer hiring process",
-  "main": "index.jsx",
+  "main": "index.js",
   "author": "Bruna Guimarães Chamon",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "nodemon src/index.jsx"
+    "start": "nodemon src/index.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

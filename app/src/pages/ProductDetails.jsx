@@ -15,7 +15,9 @@ function ProductDetails() {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const { payload } = await dispatch(handleSearchProductById(productId));
+      const { payload = {} } = await dispatch(
+        handleSearchProductById(productId)
+      );
 
       setProduct(payload);
     };

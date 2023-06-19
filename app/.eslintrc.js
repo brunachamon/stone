@@ -27,6 +27,7 @@ module.exports = {
     "react/prop-types": 0,
     "no-return-await": 0,
     "no-promise-executor-return": 0,
+    "comma-dangle": 0,
     "no-underscore-dangle": ["error", { allow: ["_id"] }],
     "jsx-a11y/label-has-associated-control": [
       "error",

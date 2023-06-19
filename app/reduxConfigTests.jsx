@@ -4,7 +4,8 @@ import { render as rtlRender } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { reducers } from "./src/store";
 
-const store = ({ preloadedState } = {}) => configureStore({ reducer: reducers, preloadedState });
+const store = ({ preloadedState } = {}) =>
+  configureStore({ reducer: reducers, preloadedState });
 
 function render(ui, { initialState, ...renderOptions } = {}) {
   function Wrapper({ children }) {
@@ -19,3 +20,4 @@ function render(ui, { initialState, ...renderOptions } = {}) {
 }
 
 export default render;
+export { store };

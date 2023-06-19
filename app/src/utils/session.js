@@ -1,6 +1,6 @@
-const { default: RouteNames } = require("../routes/RouteNames");
-const { setAuthToken } = require("../services/axios");
-const { clearStore } = require("../slices/user");
+import RouteNames from "../routes/RouteNames";
+import { setAuthToken } from "../services/axios";
+import { clearStore } from "../slices/user";
 
 const logout = (dispatch, navigate) => {
   dispatch(clearStore());

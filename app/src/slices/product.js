@@ -8,12 +8,12 @@ export const handleFetchProducts = createAsyncThunk(
     const { data = [] } = await api.get("/products");
 
     return data;
-  },
+  }
 );
 
 export const handleNewProduct = createAsyncThunk(
   "products/register",
-  async (data) => await api.post("/products", data),
+  async (data) => await api.post("/products", data)
 );
 
 export const handleEditProduct = createAsyncThunk(
@@ -22,7 +22,7 @@ export const handleEditProduct = createAsyncThunk(
     const { data: results = [] } = await api.put(`/products/${data._id}`, data);
 
     return results;
-  },
+  }
 );
 
 export const handleSearchProductById = createAsyncThunk(
@@ -31,12 +31,12 @@ export const handleSearchProductById = createAsyncThunk(
     const { data: results = [] } = await api.get(`/products/${id}`);
 
     return results;
-  },
+  }
 );
 
 export const handleRemoveProduct = createAsyncThunk(
   "products/remove",
-  async (id) => await api.delete(`/products/${id}`),
+  async (id) => await api.delete(`/products/${id}`)
 );
 
 const productSlice = createSlice({
