@@ -1,24 +1,23 @@
-import axios, { HttpStatusCode } from "axios";
+import axios from "axios";
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_ADDRESS,
 });
 
-const setupAxiosErrorInterceptor = (navigate, onError) => {
-  instance.interceptors.response.use(
-    (response) => response,
-    (error) => {
-      if (
-        error.response
-        && error.response.status === HttpStatusCode.Unauthorized
-      ) {
-        onError?.();
-        navigate("/login");
-      }
-
-      return Promise.reject(error);
-    },
-  );
+const setupAxiosErrorInterceptor = () => {
+  // instance.interceptors.response.use(
+  //   (response) => response,
+  //   (error) => {
+  //     if (
+  //       error.response
+  //       && error.response.status === HttpStatusCode.Unauthorized
+  //     ) {
+  //       onError?.();
+  //       navigate("/login");
+  //     }
+  //     return Promise.reject(error);
+  //   },
+  // );
 };
 
 function setAuthToken(token) {

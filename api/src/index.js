@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const productRoutes = require("./routes/product");
 const userRoutes = require("./routes/user");
 const loginRoutes = require("./routes/login");
+const suggestionRoutes = require("./routes/suggestion");
 
 const RouteNames = require("./routes/RoutesNames");
 const { HTTP_STATUS_CODES } = require("./utils/httpStatusCodes");
@@ -20,10 +21,9 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Conexao com o MongoDB
-mongoose
-  .connect(process.env.mongoURI, {
-    useNewUrlParser: true,
-  })
+mongoose.connect(process.env.mongoURI, {
+  useNewUrlParser: true,
+});
 
 // Middleware para validar token do usuário
 const authenticateUser = (req, res, next) => {
@@ -55,6 +55,9 @@ app.use(RouteNames.USER, userRoutes);
 
 // Rota de login
 app.use(RouteNames.LOGIN, loginRoutes);
+
+// Rota de sugestao de produts
+app.use(RouteNames.SUGGESTIONS, suggestionRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server alive in ${PORT}`);

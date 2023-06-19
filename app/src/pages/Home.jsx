@@ -1,5 +1,18 @@
+import { useEffect } from "react";
+
 function Home() {
-  return <>Página de produtos sugeridos</>;
+  useEffect(() => {
+    const fetchSuggestedProducts = () => null;
+
+    fetchSuggestedProducts();
+  }, []);
+
+  return (
+    <>
+      Com base nos seus produtos visualizados, separamos algumas sugestões que
+      você talvez possa gostar:{" "}
+    </>
+  );
 }
 
 export default Home;

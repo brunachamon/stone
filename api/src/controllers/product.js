@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Product = require("../models/Product");
 
+const { saveSuggestionKeywords } = require("./suggestion");
+
 const { HTTP_STATUS_CODES } = require("../utils/httpStatusCodes");
 const ValidationMessages = require("../utils/validationMessages");
 
@@ -28,6 +30,9 @@ const searchProduct = async (req, res) => {
         .status(HTTP_STATUS_CODES.NOT_FOUND)
         .json({ error: "Produto não encontrado" });
     }
+
+    // Salve keywords from the product edited to suggest more products with this words later
+    saveSuggestionKeywords(req, res, product);
 
     res.json(product);
   } catch (error) {
@@ -113,10 +118,13 @@ const removeProduct = async (req, res) => {
   }
 };
 
+const suggestionsPerUser = async (req, res) => {};
+
 module.exports = {
   listProducts,
   searchProduct,
   newProduct,
   editProduct,
   removeProduct,
+  suggestionsPerUser,
 };

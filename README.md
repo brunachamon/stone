@@ -1,6 +1,11 @@
 ### Descrição do projeto
 
 System to manage products for an online store.
+Wich includes CRUD for products, login, logout, registring new user and a list to suggested products.
+The suggestion works with EDEN AI, which selects the keywords of the products that user opened at least once and,
+after that, the system can search by text similar products with these keywords.
+
+Learn more about how Eden can be implemented here: https://docs.edenai.co/reference/pipeline_create
 
 ### Requisites
 
